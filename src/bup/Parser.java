@@ -24,7 +24,32 @@ public class Parser {
     private final Token finCadena = new Token(TipoToken.EOF, "");
 
     private int i = 0;
+    //CONTADORES DE LOS STACK
+    private short QN = 0
+            , DN = 0
+            , PN = 0
+            , AN = 0
+            , A1N = 0
+            , A2N = 0
+            , A3N = 0
+            , TN = 0
+            , T1N = 0
+            , T2N = 0
+            , T3N = 0;
     private boolean hayErrores = false;
+    //STACK
+    private String[] Q = new String[4];
+    private String[] D = new String[2];
+    private String[] P = new String[1];
+    private String[] A = new String[2];
+    private String[] A1 = new String[2];
+    private String[] A2 = new String[2];
+    private String[] A3 = new String[2];
+    private String[] T = new String[2];
+    private String[] T1 = new String[2];
+    private String[] T2 = new String[2];
+    private String[] T3 = new String[1];
+    
 
     private Token preanalisis;
 
@@ -34,8 +59,19 @@ public class Parser {
 
     public void parse(){
         i = 0;
+        l = 0;
         preanalisis = tokens.get(i);
-        Q();
+        if(preanalisis.equals(select)){
+            //Q
+            coincidir(select);
+            Q[l] = "SELECT";
+            l++;
+        }else if(preanalisis.equals(distinct)){
+            //D
+            coincidir(distinct);
+            D[l] = "DISTINCT";
+            l++;
+        }
 
         if(!hayErrores && !preanalisis.equals(finCadena)){
             System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
@@ -44,144 +80,9 @@ public class Parser {
             System.out.println("Consulta válida");
         }
 
-        /*if(!preanalisis.equals(finCadena)){
-            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
-        }else if(!hayErrores){
-            System.out.println("Consulta válida");
-        }*/
     }
 
-    void Q(){
-        if(preanalisis.equals(select)){
-            coincidir(select);
-            D();
-            coincidir(from);
-            T();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba la palabra reservada SELECT.");
-        }
-    }
-
-    void D(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(distinct)){
-            coincidir(distinct);
-            P();
-        }
-        else if(preanalisis.equals(asterisco) || preanalisis.equals(identificador)){
-            P();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba DISTINCT, * o un identificador.");
-        }
-    }
-
-    void P(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(asterisco)){
-            coincidir(asterisco);
-        }
-        else if(preanalisis.equals(identificador)){
-            A();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición \" + preanalisis.posicion + \". Se esperaba * o un identificador.");
-        }
-    }
-
-    void A(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            A2();
-            A1();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
-        }
-    }
-
-    void A1(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(coma)){
-            coincidir(coma);
-            A();
-        }
-    }
-
-    void A2(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
-            A3();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
-        }
-    }
-
-    void A3(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(punto)){
-            coincidir(punto);
-            coincidir(identificador);
-        }
-    }
-
-    void T(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            T2();
-            T1();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
-        }
-    }
-
-    void T1(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(coma)){
-            coincidir(coma);
-            T();
-        }
-    }
-
-    void T2(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
-            T3();
-        }
-        else{
-            hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un identificador.");
-        }
-    }
-
-    void T3(){
-        if(hayErrores) return;
-
-        if(preanalisis.equals(identificador)){
-            coincidir(identificador);
-        }
-    }
-
+    
 
     void coincidir(Token t){
         if(hayErrores) return;
