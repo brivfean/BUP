@@ -93,15 +93,18 @@ public class Parser {
             }else{
                 if(preanalisis.equals(identificador)){
                     //A2
+                    coincidir(identificador);
                     A2[A2N] = "ID";
                     A2N++;
                 }
                 if(preanalisis.equals(punto)){
                     //A3
+                    coincidir(punto);
                     A3[A3N] = ".";
                     A3N++;
                     if(preanalisis.equals(identificador)){
                     //A3 p 2
+                    coincidir(identificador);
                     A3[A3N] = "ID";
                     A3N++;
                     A2[A2N] = "A3";
@@ -115,6 +118,7 @@ public class Parser {
                 }
                 if(preanalisis.equals(coma)){
                     //A1
+                    coincidir(coma);
                     A1[A1N] = ",";
                     A1N++;
                     //if A entonces repetir a
@@ -137,22 +141,295 @@ public class Parser {
                 QN++;
                 }
                 
+                //---------------------------------------------
+                
+                AN = 0;
+                A1N = 0;
+                A2N = 0;
+                A3N = 0;
+                
+                if(preanalisis.equals(identificador)){
+                    //A2
+                    coincidir(identificador);
+                    A2[A2N] = "ID";
+                    A2N++;
+                }
+                if(preanalisis.equals(punto)){
+                    //A3
+                    coincidir(punto);
+                    A3[A3N] = ".";
+                    A3N++;
+                    if(preanalisis.equals(identificador)){
+                    //A3 p 2
+                    coincidir(identificador);
+                    A3[A3N] = "ID";
+                    A3N++;
+                    A2[A2N] = "A3";
+                    A2N++;
+                    }
+                }else if(A3N == 0){
+                    //Epsilon
+                    A3N=2;
+                    A2[A2N] = "A3";
+                    A2N++;
+                }
+                if(preanalisis.equals(coma)){
+                    //A1
+                    coincidir(coma);
+                    A1[A1N] = ",";
+                    A1N++;
+                    //if A entonces repetir a
+                    A1N++;
+                }else{
+                    //Epsilon
+                    A1N=2;
+                }
+                if(A2N == 2 && (A1N == 2 && A3N == 2)){
+                //A
+                P[PN] = "A";
+                PN++;
+                A[AN] = "A2";
+                AN++;
+                A[AN] = "A1";
+                AN++;
+                
+                }
+                
+                //---------------------------------------------
+                
+                AN = 0;
+                A1N = 0;
+                A2N = 0;
+                A3N = 0;
+                
+                if(preanalisis.equals(identificador)){
+                    //A2
+                    coincidir(identificador);
+                    A2[A2N] = "ID";
+                    A2N++;
+                }
+                if(preanalisis.equals(punto)){
+                    //A3
+                    coincidir(punto);
+                    A3[A3N] = ".";
+                    A3N++;
+                    if(preanalisis.equals(identificador)){
+                    //A3 p 2
+                    coincidir(identificador);
+                    A3[A3N] = "ID";
+                    A3N++;
+                    A2[A2N] = "A3";
+                    A2N++;
+                    }
+                }else if(A3N == 0){
+                    //Epsilon
+                    A3N=2;
+                    A2[A2N] = "A3";
+                    A2N++;
+                }
+                if(preanalisis.equals(coma)){
+                    //A1
+                    coincidir(coma);
+                    A1[A1N] = ",";
+                    A1N++;
+                    //if A entonces repetir a
+                    A1N++;
+                }else{
+                    //Epsilon
+                    A1N=2;
+                }
+                if(A2N == 2 && (A1N == 2 && A3N == 2)){
+                //A
+                P[PN] = "A";
+                PN++;
+                A[AN] = "A2";
+                AN++;
+                A[AN] = "A1";
+                AN++;
+                
+                }
+                
+                //---------------------------------------------
+                
+                AN = 0;
+                A1N = 0;
+                A2N = 0;
+                A3N = 0;
+                
+                if(preanalisis.equals(identificador)){
+                    //A2
+                    coincidir(identificador);
+                    A2[A2N] = "ID";
+                    A2N++;
+                }
+                if(preanalisis.equals(punto)){
+                    //A3
+                    coincidir(punto);
+                    A3[A3N] = ".";
+                    A3N++;
+                    if(preanalisis.equals(identificador)){
+                    //A3 p 2
+                    coincidir(identificador);
+                    A3[A3N] = "ID";
+                    A3N++;
+                    A2[A2N] = "A3";
+                    A2N++;
+                    }
+                }else if(A3N == 0){
+                    //Epsilon
+                    A3N=2;
+                    A2[A2N] = "A3";
+                    A2N++;
+                }
+                if(preanalisis.equals(coma)){
+                    //A1
+                    coincidir(coma);
+                    A1[A1N] = ",";
+                    A1N++;
+                    //if A entonces repetir a
+                    A1N++;
+                }else{
+                    //Epsilon
+                    A1N=2;
+                }
+                if(A2N == 2 && (A1N == 2 && A3N == 2)){
+                //A
+                P[PN] = "A";
+                PN++;
+                A[AN] = "A2";
+                AN++;
+                A[AN] = "A1";
+                AN++;
+                
+                }
+                
+                //---------------------------------------------
+                
+                AN = 0;
+                A1N = 0;
+                A2N = 0;
+                A3N = 0;
+                
+                if(preanalisis.equals(identificador)){
+                    //A2
+                    coincidir(identificador);
+                    A2[A2N] = "ID";
+                    A2N++;
+                }
+                if(preanalisis.equals(punto)){
+                    //A3
+                    coincidir(punto);
+                    A3[A3N] = ".";
+                    A3N++;
+                    if(preanalisis.equals(identificador)){
+                    //A3 p 2
+                    coincidir(identificador);
+                    A3[A3N] = "ID";
+                    A3N++;
+                    A2[A2N] = "A3";
+                    A2N++;
+                    }
+                }else if(A3N == 0){
+                    //Epsilon
+                    A3N=2;
+                    A2[A2N] = "A3";
+                    A2N++;
+                }
+                if(preanalisis.equals(coma)){
+                    //A1
+                    coincidir(coma);
+                    A1[A1N] = ",";
+                    A1N++;
+                    //if A entonces repetir a
+                    A1N++;
+                }else{
+                    //Epsilon
+                    A1N=2;
+                }
+                if(A2N == 2 && (A1N == 2 && A3N == 2)){
+                //A
+                P[PN] = "A";
+                PN++;
+                A[AN] = "A2";
+                AN++;
+                A[AN] = "A1";
+                AN++;
+                
+                }
+                
+                //---------------------------------------------
+                
+                AN = 0;
+                A1N = 0;
+                A2N = 0;
+                A3N = 0;
+                
+                if(preanalisis.equals(identificador)){
+                    //A2
+                    coincidir(identificador);
+                    A2[A2N] = "ID";
+                    A2N++;
+                }
+                if(preanalisis.equals(punto)){
+                    //A3
+                    coincidir(punto);
+                    A3[A3N] = ".";
+                    A3N++;
+                    if(preanalisis.equals(identificador)){
+                    //A3 p 2
+                    coincidir(identificador);
+                    A3[A3N] = "ID";
+                    A3N++;
+                    A2[A2N] = "A3";
+                    A2N++;
+                    }
+                }else if(A3N == 0){
+                    //Epsilon
+                    A3N=2;
+                    A2[A2N] = "A3";
+                    A2N++;
+                }
+                if(preanalisis.equals(coma)){
+                    //A1
+                    coincidir(coma);
+                    A1[A1N] = ",";
+                    A1N++;
+                    //if A entonces repetir a
+                    A1N++;
+                }else{
+                    //Epsilon
+                    A1N=2;
+                }
+                if(A2N == 2 && (A1N == 2 && A3N == 2)){
+                //A
+                P[PN] = "A";
+                PN++;
+                A[AN] = "A2";
+                AN++;
+                A[AN] = "A1";
+                AN++;
+                
+                }
+                
             }
             
         }
         
         if(preanalisis.equals(from)){
             //T1
+            coincidir(from);
             Q[QN] = "FROM";
             QN++;
         }
         if(preanalisis.equals(identificador)){
             //T2
+            coincidir(identificador);
             T2[T2N] = "ID";
             T2N++;
         }
         if(preanalisis.equals(identificador)){
             //T3
+            coincidir(identificador);
             T3[T3N] = "ID";
             T3N++;
             T2[T2N] = "T3";
@@ -165,6 +442,7 @@ public class Parser {
         }
         if(preanalisis.equals(coma)){
             //T1
+            coincidir(coma);
             T1[T1N] = ",";
             T1N++;
             //If T entonces repetir T
@@ -184,7 +462,7 @@ public class Parser {
             QN++;
         }
         
-        if(QN == 4 && 
+        /*if(QN == 4 && 
                 DN == 2 && 
                 PN == 1 && 
                 AN == 2 && 
@@ -196,7 +474,7 @@ public class Parser {
                 T2N == 2 && 
                 T3N == 1){
             
-        }else if(!hayErrores && !preanalisis.equals(finCadena)){
+        }else*/ if(!hayErrores && !preanalisis.equals(finCadena)){
             System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
         }
         else if(!hayErrores && preanalisis.equals(finCadena)){
