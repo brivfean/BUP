@@ -59,19 +59,94 @@ public class Parser {
 
     public void parse(){
         i = 0;
-        l = 0;
+        QN = 0;
+        DN = 0;
+        PN = 0;
+        AN = 0;
+        A1N = 0;
+        A2N = 0;
+        A3N = 0;
+        TN = 0;
+        T1N = 0;
+        T2N = 0;
+        T3N = 0;
         preanalisis = tokens.get(i);
         if(preanalisis.equals(select)){
             //Q
             coincidir(select);
-            Q[l] = "SELECT";
-            l++;
-        }else if(preanalisis.equals(distinct)){
+            Q[QN] = "SELECT";
+            QN++;
+        }
+        if(preanalisis.equals(distinct)){
             //D
             coincidir(distinct);
-            D[l] = "DISTINCT";
-            l++;
+            D[DN] = "DISTINCT";
+            DN++;
         }
+        if(preanalisis.equals(asterisco)){
+            //P
+            coincidir(asterisco);
+            P[PN] = "*";
+            D[DN] = "P";
+            PN++;
+            DN++;
+        }
+        if(A2N == 2 && ( A1N == 1 || A1N == 0)){
+            //A
+            P[PN] = "A";
+            PN++;
+            A[AN] = "A2";
+            AN++;
+            A[AN] = "A1";
+            AN++;
+        }
+        if(preanalisis.equals(coma)){
+            //A1
+            A1[A1N] = ",";
+            A1N++;
+        }else{
+            //Epsilon
+            A1N++;
+        }
+        if(preanalisis.equals(identificador)){
+            //A2
+            A2[A2N] = "ID";
+            A2N++;
+        }
+        if(preanalisis.equals(punto)){
+            //A3
+            A3[A3N] = ".";
+            A3N++;
+            if(preanalisis.equals(identificador)){
+            //A3 p 2
+            A3[A3N] = "ID";
+            A3N++;
+            }
+        }else if(A3N == 0){
+            //Epsilon
+            A3N=2;
+        }
+        if(T2N == 2 && T1N == 2){
+            //T
+            T[TN] = "T2";
+            TN++;
+            T[TN] = "T1";
+            TN++;
+            Q[QN] = "T";
+            QN++;
+        }
+        if(preanalisis.equals(coma)){
+            //T1
+            T1[T1N] = ",";
+            T1N++;
+        }
+        if(preanalisis.equals(identificador)){
+            //T2
+            T2[T2N] = "ID";
+            T2N++;
+        }
+        
+        
 
         if(!hayErrores && !preanalisis.equals(finCadena)){
             System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
